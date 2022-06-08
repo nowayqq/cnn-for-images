@@ -6,12 +6,11 @@ from os.path import exists
 from sys import exit
 from keras.models import load_model
 
-
 model = load_model('model.h5')
 dataset_path = "your_images/"
 classes = np.array(['airplane', 'automobile', 'bird',
-                   'cat', 'deer', 'dog', 'frog',
-                   'horse', 'ship', 'truck'])
+                    'cat', 'deer', 'dog', 'frog',
+                    'horse', 'ship', 'truck'])
 
 i = 0
 images = []
