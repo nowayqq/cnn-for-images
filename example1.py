@@ -8,30 +8,17 @@ from keras.models import load_model
 model = load_model('model.h5')
 dataset_path = "images/"
 
-dog = PIL.Image.open(dataset_path + 'dog' + '.jpg')
-dog = dog.resize((32, 32), PIL.Image.ANTIALIAS)
+file_names = ['dog', 'cat', 'automobile',
+              'ship', 'dog2', 'cat2']
 
-cat = PIL.Image.open(dataset_path + 'cat' + '.jpg')
-cat = cat.resize((32, 32), PIL.Image.ANTIALIAS)
+test_h = []
 
-automobile = PIL.Image.open(dataset_path + 'automobile' + '.jpg')
-automobile = automobile.resize((32, 32), PIL.Image.ANTIALIAS)
+for i in range(len(file_names)):
+    test_h.append(PIL.Image.open(dataset_path + file_names[i] + '.jpg'))
+    test_h[i] = test_h[i].resize((32, 32), PIL.Image.ANTIALIAS)
+    test_h[i] = np.array(test_h[i])
 
-ship = PIL.Image.open(dataset_path + 'ship' + '.jpg')
-ship = ship.resize((32, 32), PIL.Image.ANTIALIAS)
-
-dog2 = PIL.Image.open(dataset_path + 'dog2' + '.jpg')
-dog2 = dog2.resize((32, 32), PIL.Image.ANTIALIAS)
-
-cat2 = PIL.Image.open(dataset_path + 'cat2' + '.jpg')
-cat2 = cat2.resize((32, 32), PIL.Image.ANTIALIAS)
-
-test_h = np.array([np.array(dog), np.array(cat),
-                   np.array(automobile), np.array(ship),
-                   np.array(dog2), np.array(cat2)])
-
-test_h = test_h.astype('float32')
-test_h = test_h / 255.0
+test_h = np.array(test_h).astype('float32') / 255.0
 
 answers = np.array([np.zeros(10), np.zeros(10),
                     np.zeros(10), np.zeros(10),
@@ -52,11 +39,7 @@ classes = np.array(['airplane', 'automobile', 'bird',
                     'cat', 'deer', 'dog', 'frog',
                     'horse', 'ship', 'truck'])
 
-file_names = ['dog', 'cat', 'automobile',
-              'ship', 'dog2', 'cat2']
-
-tmp = pd.Series(np.round(pred[0] * 100), name='dog')
-df = pd.DataFrame(tmp)
+df = pd.DataFrame()
 df.index = classes
 
 for i in range(len(file_names)):
