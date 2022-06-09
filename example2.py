@@ -6,6 +6,7 @@ from os.path import exists
 from sys import exit
 from keras.models import load_model
 
+
 model = load_model('model.h5')
 dataset_path = "your_images/"
 classes = np.array(['airplane', 'automobile', 'bird',
@@ -43,7 +44,8 @@ for i in range(len(df.index)):
     for item in df:
         for value in df[item]:
             if value == df.iloc[i].max():
-                arr.append(item)
+                arr.append((item, value))
 
 for i in range(len(arr)):
-    print(f'The img{df.index[i]} was predicted to be a {arr[i]}')
+    print(f'The img{df.index[i]} was predicted to be a ' +
+          f'{arr[i][0]} with {np.round(arr[i][1], 2)} percent')

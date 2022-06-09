@@ -52,19 +52,20 @@ classes = np.array(['airplane', 'automobile', 'bird',
                     'cat', 'deer', 'dog', 'frog',
                     'horse', 'ship', 'truck'])
 
+file_names = ['dog', 'cat', 'automobile',
+              'ship', 'dog2', 'cat2']
+
 tmp = pd.Series(np.round(pred[0] * 100), name='dog')
 df = pd.DataFrame(tmp)
 df.index = classes
-df['dog'] = np.round(pred[0] * 100, 2)
-df['cat'] = np.round(pred[1] * 100, 2)
-df['automobile'] = np.round(pred[2] * 100, 3)
-df['ship'] = np.round(pred[3] * 100, 2)
-df['dog2'] = np.round(pred[4] * 100, 2)
-df['cat2'] = np.round(pred[5] * 100, 2)
+
+for i in range(len(file_names)):
+    df[file_names[i]] = np.round(pred[i] * 100, 2)
 
 arr = []
 for item in df:
     arr.append(df[df[item] == max(df[item])].index[0])
 
 for i in range(len(arr)):
-    print(f'The {df.columns[i]} was predicted to be a {arr[i]}')
+    print(f'The {df.columns[i]} was predicted to be a {arr[i]} ' +
+          f'with {np.round(df[file_names[i]].max(), 2)} percent')
