@@ -19,6 +19,8 @@ images = []
 for filename in glob.glob(f'{dataset_path}/*.jpg'):
     im = PIL.Image.open(filename)
     im = im.resize((32, 32), PIL.Image.Resampling.LANCZOS)
+    if im in images:
+        continue
     images.append(im)
 
 if len(images) == 0:
