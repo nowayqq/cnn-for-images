@@ -23,9 +23,7 @@ for filename in glob.glob(f'{dataset_path}/*.jpg'):
 
 if len(images) == 0:
     exit(f'No images in {dataset_path} directory\n' +
-         'Or you named them wrong, you should name ' +
-         'them \'img0\', \'img1\', \'img2\', etc\n' +
-         'And acceptable format is only \'.jpg\'')
+         'Note: \'.jpg\' is only acceptable format')
 
 for i in range(len(images)):
     images[i] = np.array(images[i])
