@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 import PIL.Image
+import glob
 
-from os.path import exists
 from sys import exit
 from keras.models import load_model
 
@@ -16,11 +16,10 @@ classes = np.array(['airplane', 'automobile', 'bird',
 i = 0
 images = []
 
-while exists(f'{dataset_path}img{i}.jpg'):
-    img = PIL.Image.open(f'{dataset_path}img{i}.jpg')
-    img = img.resize((32, 32), PIL.Image.Resampling.LANCZOS)
-    images.append(img)
-    i += 1
+for filename in glob.glob(f'{dataset_path}/*.jpg'):
+    im = PIL.Image.open(filename)
+    im = im.resize((32, 32), PIL.Image.Resampling.LANCZOS)
+    images.append(im)
 
 if len(images) == 0:
     exit(f'No images in {dataset_path} directory\n' +
