@@ -15,7 +15,7 @@ test_h = []
 
 for i in range(len(file_names)):
     test_h.append(PIL.Image.open(dataset_path + file_names[i] + '.jpg'))
-    test_h[i] = test_h[i].resize((32, 32), PIL.Image.ANTIALIAS)
+    test_h[i] = test_h[i].resize((32, 32), PIL.Image.Resampling.LANCZOS)
     test_h[i] = np.array(test_h[i])
 
 test_h = np.array(test_h).astype('float32') / 255.0

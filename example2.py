@@ -18,7 +18,7 @@ images = []
 
 while exists(f'{dataset_path}img{i}.jpg'):
     img = PIL.Image.open(f'{dataset_path}img{i}.jpg')
-    img = img.resize((32, 32), PIL.Image.ANTIALIAS)
+    img = img.resize((32, 32), PIL.Image.Resampling.LANCZOS)
     images.append(img)
     i += 1
 
